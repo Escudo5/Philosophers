@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:34:39 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/13 17:06:40 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/13 18:29:44 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,27 @@ void init_all_philos(t_table *table)
 
 
 void init_forks(t_table *table)
+{ 
+    pthread_mutex_t *forks;
+    int i;
+    i = 0;
+    forks = malloc(sizeof(pthread_mutex_t) * (table->total_philo));
+    while (i < table->total_philo)
+    {
+        pthread_mutex_init(&forks[i], NULL);
+        i++;
+    }
+    table->forks = forks;
+}
+
+void destroy_forks(t_table *table)
 {
-    
-    int fork_num;
-    
-    
-    table->forks = pthread_mutex_init();
+    int i;
+    i = 0;
+    while (i < table->total_philo)
+    {
+        pthread_mutex_destroy(&table->forks[i]);
+        i++;
+    }
+    free(table->forks);
 }
