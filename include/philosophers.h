@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/14 16:17:38 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:43:56 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_philo
 {
 
     int id;  //id del filosofo
-    int status; // estado, comiendo, pensando, durmiendo
+    int status; // estado, comiendo, pensando, durmiendo  1, 2, 0
     int left_fork;
     int right_fork;
     long long last_meal; // ultima vez que comio en ms
