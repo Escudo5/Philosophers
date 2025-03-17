@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:24:04 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/17 16:14:26 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:50:01 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	ft_atoi(char *str)
 		}
 		return (result * sign);
 	}
+    return(0);
 }
 
 
@@ -58,4 +59,12 @@ int is_number(char *str)
         i++;
     }
     return(1);
+}
+
+long long get_time(void)
+{
+    struct timeval tv;
+
+    gettimeofday(&tv, NULL);
+    return (tv.tv_sec * 1000LL + tv.tv_usec / 1000);
 }

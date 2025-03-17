@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/17 15:53:27 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:50:11 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/time.h>
+
 
 
 typedef struct s_table t_table;
@@ -51,6 +53,10 @@ typedef struct s_table
     pthread_t monitor; // hilo que comprueba si siguen vivos
 }t_table;
 
+
+long long get_time(void);
+
+
 int ft_error(int n);
 void init_forks(t_table *table);
 void init_all_philos(t_table *table);
@@ -62,10 +68,7 @@ void *philo_routine(void *philo);
 void *monitor_philos(void *philo);
 int	ft_atoi(char *str);
 int is_number(char *str);
-
-
-long get_time(void);
-
+long long get_time(void);
 
 
 

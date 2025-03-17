@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:16:07 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/17 15:11:30 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:37:27 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 int main(int argc, char **argv)
 {
     t_table table;
-    
+    struct timeval tv;
     if (argc != 5 && argc != 6)
         return(ft_error(1));
-
+    long time =gettimeofday(&tv, NULL);
+    printf("%ld\n", time);
+    
     //si falla el parseo devuelve error 2;
     //parsear argumentos con atoi.
     table.total_philo = ft_atoi(argv[1]);

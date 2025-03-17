@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:47:19 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/17 16:13:54 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:31:39 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ int parse(t_table *table, int argc, char **argv)
         table->max_meals = -1;
     if (table->total_philo <= 0 || table->time_to_die <= 0 || table->time_to_eat <= 0 || table->time_to_sleep <= 0 || (argc == 6 && table->max_meals <= 0))
         return(ft_error(3));
+    return(0);
 }
