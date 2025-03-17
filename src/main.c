@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:16:07 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/17 16:37:27 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/17 18:17:46 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,17 @@
 int main(int argc, char **argv)
 {
     t_table table;
-    struct timeval tv;
     if (argc != 5 && argc != 6)
         return(ft_error(1));
-    long time =gettimeofday(&tv, NULL);
+    long time =get_time();
     printf("%ld\n", time);
-    
-    //si falla el parseo devuelve error 2;
-    //parsear argumentos con atoi.
     table.total_philo = ft_atoi(argv[1]);
     table.time_to_die = ft_atoi(argv[2]);
     table.time_to_eat = ft_atoi(argv[3]);
     table.time_to_sleep = ft_atoi(argv[4]);
-    init_forks(&table);
     init_all_philos(&table);
+    init_forks(&table);
+    printf("Entro en fincion de hilos\n");
     start_threads(&table);
     int i;
     i = 0;
@@ -37,7 +34,7 @@ int main(int argc, char **argv)
         pthread_join(table.philos[i].thread, NULL);
         i++;
     }
-    pthread_join(table.monitor, NULL);
+    pthread_join(table.monitor, NULL); //el codigo rompe  aqui
     destroy_all(&table);
     return(0);
 }
