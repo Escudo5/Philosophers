@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/17 15:20:15 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:53:27 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void destroy_all(t_table *table);
 void *philo_routine(void *philo);
 void *monitor_philos(void *philo);
 int	ft_atoi(char *str);
+int is_number(char *str);
+
 
 long get_time(void);
 
