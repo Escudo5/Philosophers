@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:34:39 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/14 15:06:06 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:44:10 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void philo_init(t_philo *philo, int id, t_table *table)
     philo->table = table;
     philo->left_fork = id - 1;
     philo->right_fork = id % table->total_philo;
+    pthread_mutex_init(&philo->meal_mutex, NULL);
 }
 
 void init_all_philos(t_table *table)
@@ -69,4 +70,5 @@ void start_threads(t_philo *philo, t_table *table)
         pthread_create(&table->philos[i].thread, NULL, philo_routine, &table->philos[i]);
         i++;
     }
+    pthread_create(&table->monitor, NULL, monitor_philos, &table);
 }
