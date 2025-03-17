@@ -6,11 +6,11 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:34:39 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/17 12:44:10 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:15:08 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <philosophers.h>
+# include "../include/philosophers.h"
 
 void philo_init(t_philo *philo, int id, t_table *table)
 {    
@@ -61,7 +61,7 @@ void destroy_forks(t_table *table)
 }
 
 
-void start_threads(t_philo *philo, t_table *table)
+void start_threads(t_table *table)
 {
     int i;
     i = 0;

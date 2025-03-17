@@ -6,14 +6,14 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 15:56:17 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/17 12:54:58 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:19:58 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../include/philosophers.h"
 
 
-void philo_routine(void *philo)
+void *philo_routine(void *philo)
 {
    t_philo *ph = (t_philo *)philo;
 
@@ -55,6 +55,7 @@ void philo_routine(void *philo)
       pthread_mutex_unlock(&ph->table->print_lock);
       usleep(1000);
    }
+   return(NULL);
 }
 
 
@@ -88,4 +89,23 @@ void *monitor_philos(void *arg)
       }
       usleep(1000); 
    }
+}
+
+void destroy_all(t_table *table)
+{
+   int i;
+   i = 0;
+   while (i < table->total_philo)
+   {
+      pthread_mutex_destroy(&table->philos[i].meal_mutex);
+      i++;
+   }
+   i = 0;
+   while(i < table->total_philo)
+   {
+      pthread_mutex_destroy(&table->forks[i]);
+      i++;
+   }
+   pthread_mutex_destroy(&table->sim_mutex);
+   pthread_mutex_destroy(&table->print_lock);
 }
