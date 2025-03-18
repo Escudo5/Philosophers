@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:16:07 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/17 18:17:46 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/18 11:18:06 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int main(int argc, char **argv)
     table.time_to_eat = ft_atoi(argv[3]);
     table.time_to_sleep = ft_atoi(argv[4]);
     init_all_philos(&table);
-    init_forks(&table);
     printf("Entro en fincion de hilos\n");
+    init_forks(&table);
     start_threads(&table);
     int i;
     i = 0;
@@ -34,6 +34,7 @@ int main(int argc, char **argv)
         pthread_join(table.philos[i].thread, NULL);
         i++;
     }
+    printf("Llega al join despues del while\n");
     pthread_join(table.monitor, NULL); //el codigo rompe  aqui
     destroy_all(&table);
     return(0);

@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:34:39 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/17 18:57:31 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/18 11:46:15 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,18 @@ void init_all_philos(t_table *table)
 {
     int i;
     i = 0;
+    if (table->total_philo <= 0 || table->total_philo > 200)
+    {
+        printf("Error en el numero de filos\n");
+        return;
+    }
     table->philos = malloc(sizeof(t_philo) * table->total_philo);
     if (!table->philos)
     {
         printf("Error: no memoria para filo\n");
         return;
     }
-    printf("malloc philos\n");
+    printf("malloc philos en %p\n", (void *)table->philos);
     while (i < table->total_philo)
     {
         if (pthread_mutex_init(&table->philos[i].meal_mutex, NULL) != 0)
@@ -95,11 +100,26 @@ void start_threads(t_table *table)
 {
     int i;
     i = 0;
+    if (!table->philos || !table->forks)
+    {
+        printf("Error, no se puede iniciar hilos\n");
+        return;
+    }
     while (i < table->total_philo)
     {
-        pthread_create(&table->philos[i].thread, NULL, philo_routine, &table->philos[i]);
+        printf("inicio de funcion start_threads %d\n", i);
+        printf("Verificando filo %d -> ID; %d, Direccion: %p\n", i, table->philos[i].id, (void*)&table->philos[i]);
+        int err = pthread_create(&table->philos[i].thread, NULL, philo_routine, &table->philos[i]);
+        if (err != 0)
+        {
+            printf("Error creando el hilo %d: %s\n", i, strerror(err));
+            return;
+        }
         i++;
     }
     printf("creo monitor\n");
-    pthread_create(&table->monitor, NULL, monitor_philos, &table);
+    if (pthread_create(&table->monitor, NULL, monitor_philos, table) != 0)
+    {
+        printf("no se puede crear monitor\n");
+    }
 }

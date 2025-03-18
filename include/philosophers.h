@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/17 16:50:11 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/18 11:14:45 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/time.h>
+#include <stddef.h>
+#include <string.h>
 
 
 
@@ -69,6 +71,8 @@ void *monitor_philos(void *philo);
 int	ft_atoi(char *str);
 int is_number(char *str);
 long long get_time(void);
+void *dummy_routine(void *arg);
+
 
 
 

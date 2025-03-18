@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 15:56:17 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/17 18:13:12 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:07:09 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,14 @@ void *monitor_philos(void *arg)
 {
    t_table *table = (t_table *)arg;
    int i;
-
+   printf("ENtro en la funcion monitor\n");
    while (1)
    {
       i = 0;
       while (i < table->total_philo)
       {
+         printf("Verificando filo %d -> Direccion: %p\n", i, (void *)&table->philos[i]);
+         printf("Filo %d -> meal_mutex en %p\n", i, (void *)&table->philos[i].meal_mutex);
          pthread_mutex_lock(&table->philos[i].meal_mutex); //da segfault a partir de aqui
          if (get_time() - table->philos[i].last_meal > table->time_to_die)
          {
@@ -89,6 +91,7 @@ void *monitor_philos(void *arg)
       }
       usleep(1000); 
    }
+      printf("salgo de funcion monitor\n");
 }
 
 void destroy_all(t_table *table)
@@ -108,4 +111,12 @@ void destroy_all(t_table *table)
    }
    pthread_mutex_destroy(&table->sim_mutex);
    pthread_mutex_destroy(&table->print_lock);
+}
+
+
+void *dummy_routine(void *arg)
+{
+    (void)arg;
+    printf("Hilo iniciado correctamente\n");
+    return NULL;
 }

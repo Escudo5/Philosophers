@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:24:04 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/17 16:50:01 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/18 10:42:06 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	ft_atoi(char *str)
 	int i = 0;
 	int sign;
 	int result;
+    sign = 1;
+    result = 0;
 	while (str[i])
 	{
 		if ((str[i] == ' ') || (str[i] >= 9 && str[i] <= 13))
