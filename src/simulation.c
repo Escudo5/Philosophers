@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:56 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/19 14:23:57 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/19 15:50:07 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void philo_eat(t_philo *philo)
         return;
     pthread_mutex_lock(&philo->table->forks[philo->left_fork]);
     pthread_mutex_lock(&philo->table->print_lock);
-    printf("Philosopher %d ha cogido tenedor izq\n", philo->id);
+    printf("Philosopher %d ha cogido tenedor izquierdo\n", philo->id);
     pthread_mutex_unlock(&philo->table->print_lock);
     pthread_mutex_lock(&philo->table->forks[philo->right_fork]);
     pthread_mutex_lock(&philo->table->print_lock);
-    printf("Philosopher %d ha cogido tenedor dcho\n", philo->id);
+    printf("Philosopher %d ha cogido tenedor derecho\n", philo->id);
     pthread_mutex_unlock(&philo->table->print_lock);
     philo->status = 1; 
     pthread_mutex_lock(&philo->meal_mutex);
@@ -51,7 +51,7 @@ void philo_sleep(t_philo *philo)
     if (philo->status != 0)
     {
         pthread_mutex_lock(&philo->table->print_lock);
-        printf("Philo  %ddurmiendo\n", philo->id);
+        printf("Philo %d durmiendo\n", philo->id);
         philo->status = 0;
         pthread_mutex_unlock(&philo->table->print_lock);
     }
@@ -59,27 +59,21 @@ void philo_sleep(t_philo *philo)
     {
         if (!is_alive(philo))
             return;
-        usleep(1000);
+        usleep(100);
     }
 }
 
 void philo_think(t_philo *philo)
 {
-    pthread_mutex_lock(&philo->table->sim_mutex);
-    if (philo->table->sim_running == 0)
-    {
-        pthread_mutex_unlock(&philo->table->sim_mutex);
+    if (!is_alive(philo))
         return;
-    }
-    pthread_mutex_unlock(&philo->table->sim_mutex);
-
-    if (philo->status == 0)
+    if (philo->status != 2)
     {
         pthread_mutex_lock(&philo->table->print_lock);
+        printf("Philo %d pensando\n", philo->id);
         philo->status = 2;
-        printf("Philo pensando\n");
         pthread_mutex_unlock(&philo->table->print_lock);
-        usleep(1000 *   100);
+        usleep(10);
     }
 }
 
@@ -112,7 +106,7 @@ int is_alive(t_philo *philo)
         philo->table->sim_running = 0;
         pthread_mutex_unlock(&philo->table->sim_mutex);
         pthread_mutex_lock(&philo->table->print_lock);
-        printf("Filosofo %d ha muerto.", philo->id);
+        printf("Filosofo %d died", philo->id);
         pthread_mutex_unlock(&philo->table->print_lock);
         alive = 0;
     }  
