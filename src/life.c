@@ -6,57 +6,57 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 15:56:17 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/18 13:42:42 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:05:58 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
 
-void *philo_routine(void *philo)
-{
-   t_philo *ph = (t_philo *)philo;
+// void *philo_routine(void *philo)
+// {
+//    t_philo *ph = (t_philo *)philo;
 
-   while (1)
-   {
-      pthread_mutex_lock(&ph->table->sim_mutex);  
-      if (ph->table->sim_running == 0)  
-      {
-         pthread_mutex_unlock(&ph->table->sim_mutex);  
-         break;  
-      }
-      pthread_mutex_unlock(&ph->table->sim_mutex);  
-      if (get_time() - ph->last_meal >= ph->table->time_to_die)
-         break;
-      pthread_mutex_lock(&ph->table->forks[ph->left_fork]);
-      pthread_mutex_lock(&ph->table->forks[ph->right_fork]);
-      pthread_mutex_lock(&ph->table->print_lock);
-      printf("Ha cogido 2 tenedores \n");
-      pthread_mutex_unlock(&ph->table->print_lock);
-      ph->status = 1;
-      pthread_mutex_lock(&ph->meal_mutex);
-      ph->last_meal = get_time();
-      pthread_mutex_unlock(&ph->meal_mutex);
+//    while (1)
+//    {
+//       pthread_mutex_lock(&ph->table->sim_mutex);  
+//       if (ph->table->sim_running == 0)  
+//       {
+//          pthread_mutex_unlock(&ph->table->sim_mutex);  
+//          break;  
+//       }
+//       pthread_mutex_unlock(&ph->table->sim_mutex);  
+//       if (get_time() - ph->last_meal >= ph->table->time_to_die)
+//          break;
+//       pthread_mutex_lock(&ph->table->forks[ph->left_fork]);
+//       pthread_mutex_lock(&ph->table->forks[ph->right_fork]);
+//       pthread_mutex_lock(&ph->table->print_lock);
+//       printf("Ha cogido 2 tenedores \n");
+//       pthread_mutex_unlock(&ph->table->print_lock);
+//       ph->status = 1;
+//       pthread_mutex_lock(&ph->meal_mutex);
+//       ph->last_meal = get_time();
+//       pthread_mutex_unlock(&ph->meal_mutex);
 
-      pthread_mutex_lock(&ph->table->print_lock);
-      printf("comiendo");
-      pthread_mutex_unlock(&ph->table->print_lock);
-      usleep(ph->table->time_to_eat * 1000);
-      pthread_mutex_unlock(&ph->table->forks[ph->left_fork]);
-      pthread_mutex_unlock(&ph->table->forks[ph->right_fork]);
-      ph->status = 0;
-      pthread_mutex_lock(&ph->table->print_lock);
-      printf("durmiendo");
-      pthread_mutex_unlock(&ph->table->print_lock);
-      usleep(ph->table->time_to_sleep * 1000);
-      ph->status = 2;
-      pthread_mutex_lock(&ph->table->print_lock);
-      printf("pensando");
-      pthread_mutex_unlock(&ph->table->print_lock);
-      usleep(1000);
-   }
-   return(NULL);
-}
+//       pthread_mutex_lock(&ph->table->print_lock);
+//       printf("comiendo");
+//       pthread_mutex_unlock(&ph->table->print_lock);
+//       usleep(ph->table->time_to_eat * 1000);
+//       pthread_mutex_unlock(&ph->table->forks[ph->left_fork]);
+//       pthread_mutex_unlock(&ph->table->forks[ph->right_fork]);
+//       ph->status = 0;
+//       pthread_mutex_lock(&ph->table->print_lock);
+//       printf("durmiendo");
+//       pthread_mutex_unlock(&ph->table->print_lock);
+//       usleep(ph->table->time_to_sleep * 1000);
+//       ph->status = 2;
+//       pthread_mutex_lock(&ph->table->print_lock);
+//       printf("pensando");
+//       pthread_mutex_unlock(&ph->table->print_lock);
+//       usleep(1000);
+//    }
+//    return(NULL);
+// }
 
 
 //se podria quitar el print de linea 24 para ahorrar lineas.

@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:56 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/19 15:50:07 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:35:57 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,23 +77,27 @@ void philo_think(t_philo *philo)
     }
 }
 
-void philo_routine(t_philo *philo)
+void *philo_routine(void *philo)
 {
+    t_philo *ph = (t_philo *)philo;
     while (1)  
     {
-        pthread_mutex_lock(&philo->table->sim_mutex);
-        if (philo->table->sim_running == 0)
+        pthread_mutex_lock(&ph->table->sim_mutex);
+        if (ph->table->sim_running == 0)
         {
-            pthread_mutex_unlock(&philo->table->sim_mutex);
+            pthread_mutex_unlock(&ph->table->sim_mutex);
             break;
         }
-        pthread_mutex_unlock(&philo->table->sim_mutex);
-        if (philo->id % 2 != 0)
-            usleep(philo->table->time_to_eat * 500);
+        pthread_mutex_unlock(&ph->table->sim_mutex);
+        if (ph->id % 2 != 0)
+            usleep(ph->table->time_to_eat * 500);
+        printf("funcion comer\n");
         philo_eat(philo);
         philo_sleep(philo);
+        printf("Entro en funcion pensar\n");
         philo_think(philo);
     }
+    return(NULL);
 }
 int is_alive(t_philo *philo)
 {

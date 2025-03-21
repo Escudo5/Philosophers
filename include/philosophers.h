@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/18 11:14:45 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:15:03 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_philo
     int status; // estado, comiendo, pensando, durmiendo  1, 2, 0
     int left_fork;
     int right_fork;
+    int meals_eaten;
     long long last_meal; // ultima vez que comio en ms
     t_table *table; // refrencia a la mesa
     pthread_mutex_t meal_mutex; // mutex para proteger last meal
@@ -72,6 +73,8 @@ int	ft_atoi(char *str);
 int is_number(char *str);
 long long get_time(void);
 void *dummy_routine(void *arg);
+int is_alive(t_philo *philo);
+
 
 
 

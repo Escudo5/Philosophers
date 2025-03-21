@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:16:07 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/18 11:18:06 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:34:34 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,17 @@ int main(int argc, char **argv)
     printf("Entro en fincion de hilos\n");
     init_forks(&table);
     start_threads(&table);
-    int i;
-    i = 0;
-    while (i < table.total_philo)
-    {
-        pthread_join(table.philos[i].thread, NULL);
-        i++;
-    }
-    printf("Llega al join despues del while\n");
-    pthread_join(table.monitor, NULL); //el codigo rompe  aqui
-    destroy_all(&table);
+    // int i;
+    // i = 0;
+    // while (i < table.total_philo)
+    // {
+    //     pthread_join(table.philos[i].thread, NULL);
+    //     i++;
+    // }
+    // printf("Llega al join despues del while\n");
+    // pthread_join(table.monitor, NULL); //el codigo rompe  aqui
+    // printf("Salgo del join\n");
+    // destroy_all(&table);
     return(0);
 }
 
