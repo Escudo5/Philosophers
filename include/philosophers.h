@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/20 17:15:03 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:03:31 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <sys/time.h>
 #include <stddef.h>
 #include <string.h>
+#include <stdbool.h>
 
 
 
@@ -49,6 +50,7 @@ typedef struct s_table
     int must_eat; // veces que comer antes de terminar
     int sim_running;
     int max_meals;
+    int sim_start;
     t_philo *philos; //array de filos
     pthread_mutex_t sim_mutex;
     pthread_mutex_t *forks; // array de mutex para tenedores

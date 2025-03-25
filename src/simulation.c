@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:56 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/20 17:35:57 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/25 11:49:17 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void *philo_routine(void *philo)
     t_philo *ph = (t_philo *)philo;
     while (1)  
     {
+        //funcion de javi comprobacion hilos
         pthread_mutex_lock(&ph->table->sim_mutex);
         if (ph->table->sim_running == 0)
         {
@@ -90,12 +91,12 @@ void *philo_routine(void *philo)
         }
         pthread_mutex_unlock(&ph->table->sim_mutex);
         if (ph->id % 2 != 0)
-            usleep(ph->table->time_to_eat * 500);
+            usleep(ph->table->time_to_eat * 1000);
         printf("funcion comer\n");
-        philo_eat(philo);
-        philo_sleep(philo);
+        philo_eat(ph);
+        philo_sleep(ph);
         printf("Entro en funcion pensar\n");
-        philo_think(philo);
+        philo_think(ph);
     }
     return(NULL);
 }
@@ -117,14 +118,3 @@ int is_alive(t_philo *philo)
     pthread_mutex_unlock(&philo->meal_mutex);
     return(alive);
 }
-
-// void sleep()
-// {
-//     if (is_alive(philo))
-//     {
-//         while (tiempo de usleep < sleep_time)
-//         codigo de funcion sleep dividida en varios intervalos
-//         otra comprobacion de is is_alive
-        
-//     }
-// }
