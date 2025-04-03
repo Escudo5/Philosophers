@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:24:04 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/25 12:47:57 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/03/26 12:13:09 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ long long get_time(void)
     return (tv.tv_sec * 1000LL + tv.tv_usec / 1000);
 }
 
-bool check_philo_status (t_table *table)
-{
-    pthread_mutex_lock(&table->philos[i].)
-}
+// bool check_philo_status (t_table *table)
+// {
+//     pthread_mutex_lock(&table->philos[i].)
+// }
