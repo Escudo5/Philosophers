@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:16:07 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/03 15:13:57 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:32:11 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,10 @@
 int main(int argc, char **argv)
 {
     t_table table;
-    if (argc != 5 && argc != 6)
-        return(ft_error(1));
+    if (parse(&table, argc, argv) != 0)
+        return(1);
     long time =get_time();
     printf("%ld\n", time);
-    table.total_philo = ft_atoi(argv[1]);
-    table.time_to_die = ft_atoi(argv[2]);
-    table.time_to_eat = ft_atoi(argv[3]);
-    table.time_to_sleep = ft_atoi(argv[4]);
     init_all_philos(&table);
     printf("Entro en fincion de hilos\n");
     init_forks(&table);

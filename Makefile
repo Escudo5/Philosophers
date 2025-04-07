@@ -5,7 +5,7 @@ HEADERS = -I ./include
 
 CFLAGS = -Wall -Werror -Wextra -g3  -pthread  -MMD -MP $(HEADERS)
 
-SRCS:= $(addprefix src/, main.c life.c init.c utils.c parse.c simulation.c )
+SRCS:= $(addprefix src/, main.c life.c init.c utils.c parse.c simulation.c printer.c )
 
 OBJS = $(SRCS:.c=.o)
 DEPS = $(OBJS:.o=.d)

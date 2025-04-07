@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:47:19 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/17 16:31:39 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:42:40 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int parse(t_table *table, int argc, char **argv)
         return(ft_error(1));
     while (i < argc)
     {
+        //printf("argv[%d] = '%s'\n", i, argv[i]);
         if (!is_number(argv[i]))
             return(ft_error(2));
         i++;

@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:24:04 by smarquez          #+#    #+#             */
-/*   Updated: 2025/03/26 12:13:09 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/07 13:06:33 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int ft_error(int n)
 {
     if (n == 1)
-        printf("Número de argumentos inválido");
+        printf("Número de argumentos inválido\n");
     if (n == 2)
-        printf("Error al convertir argumentos");
+        printf("Error al convertir argumentos\n");
     if (n == 3)
         printf("Error en argumentos\n");
     return(1);
@@ -50,18 +50,23 @@ int	ft_atoi(char *str)
 
 int is_number(char *str)
 {
-    int i;
-    i = 0;;
-    if (!str || !str[0])
-        return(0);
+    int i = 0;
+
+    if (!str[i])
+        return (0);
+
+    if (str[i] == '+')
+        i++;
+
     while (str[i])
     {
-        if (str[i] >= '0' && str[i] <= '9')
-            return(0);
+        if (str[i] < '0' || str[i] > '9')
+            return (0);
         i++;
     }
-    return(1);
+    return (1);
 }
+
 
 long long get_time(void)
 {
@@ -71,7 +76,3 @@ long long get_time(void)
     return (tv.tv_sec * 1000LL + tv.tv_usec / 1000);
 }
 
-// bool check_philo_status (t_table *table)
-// {
-//     pthread_mutex_lock(&table->philos[i].)
-// }

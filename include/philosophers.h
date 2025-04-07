@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/03 15:09:28 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:29:57 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@
 #include <stdbool.h>
 
 
+
+enum e_action
+{
+    P_EAT,
+    P_SLEEP,
+    P_THINK,
+    P_FORK,
+    P_DIE,
+};
 
 typedef struct s_table t_table;
 typedef struct s_philo
@@ -53,6 +62,8 @@ typedef struct s_table
     int sim_running;
     int max_meals;
     int sim_start;
+    int start_time;
+    int full;
     t_philo *philos; //array de filos
     pthread_mutex_t sim_mutex;
     pthread_mutex_t *forks; // array de mutex para tenedores
@@ -78,6 +89,11 @@ int is_number(char *str);
 long long get_time(void);
 void *dummy_routine(void *arg);
 int is_alive(t_philo *philo);
+int parse(t_table *table, int argc, char **argv);
+void print_routine(t_philo *philo, int action);
+
+
+
 
 
 
