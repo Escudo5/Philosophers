@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 13:06:25 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/08 10:48:42 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:23:26 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static char *get_action(int action)
         return("is eating.");
     if (action == P_SLEEP)
         return("is sleeping.");
+    if (action == P_THINK)
+        return("is thinking.");
     return("Error: not vaild msg id.");
 }
 
