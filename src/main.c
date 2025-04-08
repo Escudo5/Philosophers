@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:16:07 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/07 14:32:11 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:39:33 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int main(int argc, char **argv)
     if (parse(&table, argc, argv) != 0)
         return(1);
     long time =get_time();
+    table.start_time = get_time();
     printf("%ld\n", time);
     init_all_philos(&table);
     printf("Entro en fincion de hilos\n");
