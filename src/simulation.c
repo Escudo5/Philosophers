@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:56 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/07 14:59:16 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/09 16:46:50 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,12 @@ void philo_eat(t_philo *philo)
         return;
     pthread_mutex_lock(&philo->table->forks[philo->left_fork]);
     print_routine(philo, P_FORK);
-    // pthread_mutex_lock(&philo->table->print_lock);
-    // printf("Philosopher %d ha cogido tenedor izquierdo\n", philo->id);
-    // pthread_mutex_unlock(&philo->table->print_lock);
     pthread_mutex_lock(&philo->table->forks[philo->right_fork]);
     print_routine(philo, P_FORK);
-    // pthread_mutex_lock(&philo->table->print_lock);
-    // //printf("Philosopher %d ha cogido tenedor derecho\n", philo->id);
-    // pthread_mutex_unlock(&philo->table->print_lock);
     philo->status = 1; 
     pthread_mutex_lock(&philo->meal_mutex);
     philo->last_meal = get_time();
+    philo->meals_eaten++;
     pthread_mutex_unlock(&philo->meal_mutex);
     if (philo->table->dead)
     {
@@ -36,13 +31,11 @@ void philo_eat(t_philo *philo)
         pthread_mutex_unlock(&philo->table->forks[philo->right_fork]);
         return;
     }
-    //printf("Philo %d comiendo\n", philo->id);
     print_routine(philo, P_EAT);
     usleep(philo->table->time_to_eat * 1000);
     if(!philo->table->dead)
     {
         pthread_mutex_lock(&philo->table->print_lock);
-        printf("Philosopher %d ha soltado ambos tenedores\n", philo->id);
         pthread_mutex_unlock(&philo->table->print_lock);
     }
     pthread_mutex_unlock(&philo->table->forks[philo->left_fork]);
@@ -89,15 +82,17 @@ void philo_think(t_philo *philo)
 void *philo_routine(void *philo)
 {
     t_philo *ph = (t_philo *)philo;
-    printf("Hilo iniciado -> ID: %d, Dirección: %p\n", ph->id, (void*)ph);
-    printf("Simulación iniciada, sim_running = %d\n", ph->table->sim_running);
+    pthread_mutex_lock(&ph->table->monitor);
+    pthread_mutex_unlock(&ph->table->monitor);
+    //printf("Hilo iniciado -> ID: %d, Dirección: %p\n", ph->id, (void*)ph);
+    //printf("Simulación iniciada, sim_running = %d\n", ph->table->sim_running);
     //usleep(1000 - ph->id * 10);
     if (ph->id % 2 != 0)
         usleep(1000);
-    while (ph->table->dead == 0)  
+    while (ph->table->dead == 0 && ph->meals_eaten < ph->table->max_meals)  
     {
         //printf("Filósofo %d ha terminado su rutina\n", ph->id);
-
+        printf(" Filo nº %d ha comido %d veces: \n", ph->id, ph->meals_eaten);
         //funcion de javi comprobacion hilos
         // pthread_mutex_lock(&ph->table->sim_mutex);
         // if (ph->table->sim_running == 0)
@@ -112,6 +107,9 @@ void *philo_routine(void *philo)
         //printf("Entro en funcion pensar\n");
         philo_think(ph);
     }
+    pthread_mutex_lock(&ph->meal_mutex);
+    ph->table->full = 1;
+    pthread_mutex_unlock(&ph->meal_mutex);
     return(NULL);
 }
 int is_alive(t_philo *philo)
@@ -119,6 +117,11 @@ int is_alive(t_philo *philo)
     int alive;
     alive = 1;
     pthread_mutex_lock(&philo->meal_mutex);
+    if (philo->table->full)
+    {
+        pthread_mutex_unlock(&philo->meal_mutex);
+        return(1);
+    }
     if (get_time() - philo->last_meal >= philo->table->time_to_die)
     {
         pthread_mutex_lock(&philo->table->sim_mutex);

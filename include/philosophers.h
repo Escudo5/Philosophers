@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/07 14:29:57 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/09 16:10:25 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_table
     pthread_mutex_t sim_mutex;
     pthread_mutex_t *forks; // array de mutex para tenedores
     pthread_mutex_t print_lock; // mmutex para proteher impresion
-    pthread_t monitor; // hilo que comprueba si siguen vivos
+    pthread_mutex_t monitor; 
 }t_table;
 
 
