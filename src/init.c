@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:34:39 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/09 16:48:03 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:29:06 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void philo_init(t_philo *philo, int id, t_table *table)
     philo->last_meal = get_time();
     philo->table = table;
     philo->table->full = 0;
-    philo->table->sim_running = 1;
     philo->left_fork = id - 1;
     philo->right_fork = id % table->total_philo;
     pthread_mutex_init(&philo->meal_mutex, NULL);
@@ -127,6 +126,7 @@ void start_threads(t_table *table)
     pthread_mutex_init(&table->print_lock, NULL);
     pthread_mutex_init(&table->sim_mutex, NULL);
     pthread_mutex_init(&table->monitor, NULL);
+    pthread_mutex_init(&table->meal_full, NULL);
     pthread_mutex_lock(&table->monitor);
     pthread_mutex_unlock(&table->monitor);
     printf("todos hilos creados\n");

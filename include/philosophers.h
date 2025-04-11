@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/09 16:10:25 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:29:02 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ typedef struct s_table
     int time_to_eat;
     int time_to_sleep;
     int must_eat; // veces que comer antes de terminar
-    int sim_running;
     int max_meals;
     int sim_start;
     int start_time;
@@ -69,6 +68,7 @@ typedef struct s_table
     pthread_mutex_t *forks; // array de mutex para tenedores
     pthread_mutex_t print_lock; // mmutex para proteher impresion
     pthread_mutex_t monitor; 
+    pthread_mutex_t meal_full;
 }t_table;
 
 

@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:16:07 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/07 16:39:33 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:36:19 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,20 @@ int main(int argc, char **argv)
     int i = 0;
     while (1)
     {
+        if (table.dead == 1)
+            break;
         if (!is_alive(&table.philos[i]))
         {
             table.dead = 1;
             break;
         }
+        pthread_mutex_lock(&table.meal_full);
+        if (table.full == table.total_philo)
+        {
+            pthread_mutex_unlock(&table.meal_full);
+            break;
+        }
+        pthread_mutex_unlock(&table.meal_full);
         if (i == table.total_philo - 1)
             i = 0;
         else
@@ -57,4 +66,3 @@ int main(int argc, char **argv)
     //     table.max_meals = ft_atoi(argv[5]);
     // else
     //     table.max_meals = -1;
-    // printf("Filósofos: %d, Tiempo de muerte: %d, Tiempo de comer: %d, Tiempo de dormir: %d, Comidas máximas: %d\n",table.total_philo, table.time_to_die, table.time_to_eat, table.time_to_sleep, table.max_meals);

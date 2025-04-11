@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:56 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/09 16:46:50 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:33:54 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,9 @@ void *philo_routine(void *philo)
     //usleep(1000 - ph->id * 10);
     if (ph->id % 2 != 0)
         usleep(1000);
-    while (ph->table->dead == 0 && ph->meals_eaten < ph->table->max_meals)  
+    while (ph->table->dead == 0 && (ph->table->max_meals == -1 || ph->meals_eaten < ph->table->max_meals))
     {
         //printf("Filósofo %d ha terminado su rutina\n", ph->id);
-        printf(" Filo nº %d ha comido %d veces: \n", ph->id, ph->meals_eaten);
         //funcion de javi comprobacion hilos
         // pthread_mutex_lock(&ph->table->sim_mutex);
         // if (ph->table->sim_running == 0)
@@ -102,14 +101,17 @@ void *philo_routine(void *philo)
         // }
         // pthread_mutex_unlock(&ph->table->sim_mutex);
         //printf("funcion comer\n");
+        if (ph->table->dead)
+            break;
         philo_eat(ph);
+        printf(" Filo nº %d ha comido %d veces: \n", ph->id, ph->meals_eaten);
         philo_sleep(ph);
         //printf("Entro en funcion pensar\n");
         philo_think(ph);
     }
-    pthread_mutex_lock(&ph->meal_mutex);
-    ph->table->full = 1;
-    pthread_mutex_unlock(&ph->meal_mutex);
+    pthread_mutex_lock(&ph->table->meal_full);
+    ph->table->full++;
+    pthread_mutex_unlock(&ph->table->meal_full);
     return(NULL);
 }
 int is_alive(t_philo *philo)
@@ -125,15 +127,15 @@ int is_alive(t_philo *philo)
     if (get_time() - philo->last_meal >= philo->table->time_to_die)
     {
         pthread_mutex_lock(&philo->table->sim_mutex);
-        philo->table->sim_running = 0;
-        printf("Simulación detenida por muerte del filósofo %d\n", philo->id);
+        if (philo->table->dead == 0)
+        {
+            philo->table->dead = 1;
+            print_routine(philo, P_DIE);
+            printf("Simulación detenida por muerte del filósofo %d\n", philo->id);
+        }
         pthread_mutex_unlock(&philo->table->sim_mutex);
-        print_routine(philo, P_DIE);
-        // pthread_mutex_lock(&philo->table->print_lock);
-        // printf("Filosofo %d died", philo->id);
-        // pthread_mutex_unlock(&philo->table->print_lock);
         alive = 0;
-    }  
+    }
     pthread_mutex_unlock(&philo->meal_mutex);
     return(alive);
 }
