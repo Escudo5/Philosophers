@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:56 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/14 10:58:33 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/14 12:16:26 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ void philo_sleep(t_philo *philo)
     if (philo->status != 0)
     {
         print_routine(philo, P_SLEEP);
-        // pthread_mutex_lock(&philo->table->print_lock);
-        //printf("Philo %d durmiendo\n", philo->id);
         philo->status = 0;
-        //pthread_mutex_unlock(&philo->table->print_lock);
     }
     while (get_time() - sleep_start < philo->table->time_to_sleep)
     {
@@ -71,10 +68,7 @@ void philo_think(t_philo *philo)
     if (philo->status != 2)
     {
         print_routine(philo, P_THINK);
-        //pthread_mutex_lock(&philo->table->print_lock);
-        //printf("Philo %d pensando\n", philo->id);
         philo->status = 2;
-        //pthread_mutex_unlock(&philo->table->print_lock);
         usleep(10);
     }
 }
@@ -116,7 +110,6 @@ int is_alive(t_philo *philo)
         {
             philo->table->dead = 1;
             print_routine(philo, P_DIE);
-            printf("Simulación detenida por muerte del filósofo %d\n", philo->id);
         }
         pthread_mutex_unlock(&philo->table->sim_mutex);
         alive = 0;

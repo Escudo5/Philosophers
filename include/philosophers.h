@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/14 11:02:27 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:09:53 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,6 @@ void *dummy_routine(void *arg);
 int is_alive(t_philo *philo);
 int parse(t_table *table, int argc, char **argv);
 void print_routine(t_philo *philo, int action);
-
-
-
-
-
-
 
 
 
