@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:24:04 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/07 16:37:26 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/14 17:36:04 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,3 +76,17 @@ long long get_time(void)
     return (tv.tv_sec * 1000LL) + (tv.tv_usec / 1000);
 }
 
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	size_t	total_size;
+	void	*ptr;
+
+	if (size != 0 && nmemb > SIZE_MAX / size)
+		return (NULL);
+	total_size = nmemb * size;
+	ptr = malloc(total_size);
+	if (ptr == NULL)
+		return (NULL);
+	ft_memset(ptr, 0, total_size);
+	return (ptr);
+}

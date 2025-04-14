@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:16:07 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/14 11:00:55 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/14 17:30:24 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void *monitor_routine(void* arg)
 int main(int argc, char **argv)
 {
     t_table table;
+    table = (t_table){0};
     if (parse(&table, argc, argv) != 0)
         return(1);
     table.start_time = get_time();
@@ -54,5 +55,6 @@ int main(int argc, char **argv)
         i++;
     }
     pthread_join(table.monitor_thread, NULL);
+    destroy_all(&table);
     return(0);
 }

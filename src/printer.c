@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 13:06:25 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/14 12:15:31 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/14 17:39:18 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,19 @@ void print_routine(t_philo *philo, int action)
         printf("%d %d %s \n", t, philo->id, get_action(action));
     }
     pthread_mutex_unlock(&philo->table->print_lock);
+}
+
+void	*ft_memset(void *s, int c, size_t n)
+{
+	size_t			i;
+	unsigned char	*ptr;
+
+	ptr = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		ptr[i] = (unsigned char)c;
+		i++;
+	}
+	return (s);
 }

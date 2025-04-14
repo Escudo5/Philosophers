@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/14 11:09:53 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/14 17:39:38 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdint.h>
 #include <sys/time.h>
 #include <stddef.h>
 #include <string.h>
@@ -78,7 +79,8 @@ int ft_error(int n);
 void init_forks(t_table *table);
 void init_all_philos(t_table *table);
 void philo_init(t_philo *philo, int id, t_table *table);
-void destroy_forks(t_table *table);
+void destroy_philos(t_table *table, int i);
+void destroy_forks(t_table *table, int i);
 void start_threads(t_table *table);
 void destroy_all(t_table *table);
 void *philo_routine(void *philo);
@@ -90,6 +92,10 @@ void *dummy_routine(void *arg);
 int is_alive(t_philo *philo);
 int parse(t_table *table, int argc, char **argv);
 void print_routine(t_philo *philo, int action);
+void	*ft_memset(void *s, int c, size_t n);
+void	*ft_calloc(size_t nmemb, size_t size);
+
+
 
 
 
