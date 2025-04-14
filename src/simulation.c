@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:56 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/11 17:33:54 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:58:33 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,29 +84,14 @@ void *philo_routine(void *philo)
     t_philo *ph = (t_philo *)philo;
     pthread_mutex_lock(&ph->table->monitor);
     pthread_mutex_unlock(&ph->table->monitor);
-    //printf("Hilo iniciado -> ID: %d, Dirección: %p\n", ph->id, (void*)ph);
-    //printf("Simulación iniciada, sim_running = %d\n", ph->table->sim_running);
-    //usleep(1000 - ph->id * 10);
     if (ph->id % 2 != 0)
         usleep(1000);
     while (ph->table->dead == 0 && (ph->table->max_meals == -1 || ph->meals_eaten < ph->table->max_meals))
     {
-        //printf("Filósofo %d ha terminado su rutina\n", ph->id);
-        //funcion de javi comprobacion hilos
-        // pthread_mutex_lock(&ph->table->sim_mutex);
-        // if (ph->table->sim_running == 0)
-        // {
-        //     pthread_mutex_unlock(&ph->table->sim_mutex);
-        //     break;
-        // }
-        // pthread_mutex_unlock(&ph->table->sim_mutex);
-        //printf("funcion comer\n");
         if (ph->table->dead)
             break;
         philo_eat(ph);
-        printf(" Filo nº %d ha comido %d veces: \n", ph->id, ph->meals_eaten);
         philo_sleep(ph);
-        //printf("Entro en funcion pensar\n");
         philo_think(ph);
     }
     pthread_mutex_lock(&ph->table->meal_full);

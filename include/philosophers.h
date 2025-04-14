@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/11 16:29:02 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:02:27 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,16 @@ typedef struct s_table
     int time_to_die;
     int time_to_eat;
     int time_to_sleep;
-    int must_eat; // veces que comer antes de terminar
     int max_meals;
-    int sim_start;
     int start_time;
     int full;
     t_philo *philos; //array de filos
     pthread_mutex_t sim_mutex;
     pthread_mutex_t *forks; // array de mutex para tenedores
     pthread_mutex_t print_lock; // mmutex para proteher impresion
-    pthread_mutex_t monitor; 
+    pthread_mutex_t monitor; // para que se inicien todos los hilos a la vez y no haya data race
     pthread_mutex_t meal_full;
+    pthread_t monitor_thread; //hilo monitor que comprueba que sigan vivos
 }t_table;
 
 

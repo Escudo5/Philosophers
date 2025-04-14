@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 13:06:25 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/08 11:23:26 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:55:58 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ static char *get_action(int action)
         return("is thinking.");
     return("Error: not vaild msg id.");
 }
-
-
 
 
 void print_routine(t_philo *philo, int action)
