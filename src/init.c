@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:34:39 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/15 16:33:26 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:02:06 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,33 +25,33 @@ void	philo_init(t_philo *philo, int id, t_table *table)
 	pthread_mutex_init(&philo->meal_mutex, NULL);
 }
 
-void	init_all_philos(t_table *table)
+int	init_all_philos(t_table *table)
 {
 	int	i;
 
 	i = 0;
 	if (table->total_philo <= 1 || table->total_philo > 200)
 	{
-		printf("Error en el numero de filos\n");
-		return ;
+		return (ft_error(3));
 	}
 	table->philos = calloc(sizeof(t_philo), table->total_philo);
 	if (!table->philos)
 	{
-		printf("Error: no memoria para filo\n");
-		return ;
+		//printf("Error: no memoria para filo\n");
+		return (ft_error(2));
 	}
 	while (i < table->total_philo)
 	{
 		if (pthread_mutex_init(&table->philos[i].meal_mutex, NULL) != 0)
 		{
-			printf("Error: no se puede init_all\n");
+			//printf("Error: no se puede init_all\n");
 			table->philos = NULL;
-			return ;
+			return (ft_error(2));
 		}
 		philo_init(&table->philos[i], i + 1, table);
 		i++;
 	}
+	return(0);
 }
 
 void	init_forks(t_table *table)
