@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/15 17:00:27 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:39:30 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ long long				get_time(void);
 
 int						ft_error(int n);
 void					init_forks(t_table *table);
-int					init_all_philos(t_table *table);
+int						init_all_philos(t_table *table);
 void					philo_init(t_philo *philo, int id, t_table *table);
 void					destroy_philos(t_table *table, int i);
 void					destroy_forks(t_table *table, int i);

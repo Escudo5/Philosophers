@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:34:39 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/15 17:02:06 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:39:56 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,19 @@ int	init_all_philos(t_table *table)
 	table->philos = calloc(sizeof(t_philo), table->total_philo);
 	if (!table->philos)
 	{
-		//printf("Error: no memoria para filo\n");
 		return (ft_error(2));
 	}
 	while (i < table->total_philo)
 	{
 		if (pthread_mutex_init(&table->philos[i].meal_mutex, NULL) != 0)
 		{
-			//printf("Error: no se puede init_all\n");
 			table->philos = NULL;
 			return (ft_error(2));
 		}
 		philo_init(&table->philos[i], i + 1, table);
 		i++;
 	}
-	return(0);
+	return (0);
 }
 
 void	init_forks(t_table *table)
