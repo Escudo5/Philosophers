@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 13:06:25 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/15 12:23:39 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/23 12:09:59 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 static char	*get_action(int action)
 {
 	if (action == P_DIE)
-		return ("died.");
+		return ("died");
 	if (action == P_FORK)
-		return ("has taken a fork.");
+		return ("has taken a fork");
 	if (action == P_EAT)
-		return ("is eating.");
+		return ("is eating");
 	if (action == P_SLEEP)
-		return ("is sleeping.");
+		return ("is sleeping");
 	if (action == P_THINK)
-		return ("is thinking.");
-	return ("Error: not vaild msg id.");
+		return ("is thinking");
+	return ("Error: not vaild msg id");
 }
 
 void	print_routine(t_philo *philo, int action)
@@ -35,7 +35,7 @@ void	print_routine(t_philo *philo, int action)
 	pthread_mutex_lock(&philo->table->print_lock);
 	if (!philo->table->dead || action == P_DIE)
 	{
-		printf("%d %d %s \n", t, philo->id, get_action(action));
+		printf("%d %d %s\n", t, philo->id, get_action(action));
 	}
 	pthread_mutex_unlock(&philo->table->print_lock);
 }

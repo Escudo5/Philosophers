@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:56 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/15 13:28:10 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:55:51 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,30 @@
 
 void	philo_eat(t_philo *philo)
 {
+	int first_fork;
+	int second_fork;
+	 if (philo->id % 2 == 0)
+    {
+        first_fork = philo->left_fork;
+        second_fork = philo->right_fork;
+    }
+    else
+    {
+        first_fork = philo->right_fork;
+        second_fork = philo->left_fork;
+    }
+	
 	if (philo->table->dead)
 		return ;
-	pthread_mutex_lock(&philo->table->forks[philo->left_fork]);
-	print_routine(philo, P_FORK);
-	pthread_mutex_lock(&philo->table->forks[philo->right_fork]);
-	print_routine(philo, P_FORK);
+	take_first_fork(philo,  first_fork);
+	take_second_fork(philo, first_fork, second_fork);
 	philo->status = 1;
 	update_meal(philo);
-	if (philo->table->dead)
-	{
-		pthread_mutex_unlock(&philo->table->forks[philo->left_fork]);
-		pthread_mutex_unlock(&philo->table->forks[philo->right_fork]);
-		return ;
-	}
 	print_routine(philo, P_EAT);
 	usleep(philo->table->time_to_eat * 1000);
-	if (!philo->table->dead)
-	{
-		pthread_mutex_lock(&philo->table->print_lock);
-		pthread_mutex_unlock(&philo->table->print_lock);
-	}
-	pthread_mutex_unlock(&philo->table->forks[philo->left_fork]);
-	pthread_mutex_unlock(&philo->table->forks[philo->right_fork]);
+	//philo->status = 0;
+	pthread_mutex_unlock(&philo->table->forks[second_fork]);
+	pthread_mutex_unlock(&philo->table->forks[first_fork]);
 }
 
 void	philo_sleep(t_philo *philo)
@@ -67,7 +68,6 @@ void	philo_think(t_philo *philo)
 	{
 		print_routine(philo, P_THINK);
 		philo->status = 2;
-		usleep(10);
 	}
 }
 
@@ -78,8 +78,8 @@ void	*philo_routine(void *philo)
 	ph = (t_philo *)philo;
 	pthread_mutex_lock(&ph->table->monitor);
 	pthread_mutex_unlock(&ph->table->monitor);
-	if (ph->id % 2 != 0)
-		usleep(1000);
+	// if (ph->id % 2 != 0)
+	// 	usleep(1000);
 	while (ph->table->dead == 0 && (ph->table->max_meals == -1
 			|| ph->meals_eaten < ph->table->max_meals))
 	{

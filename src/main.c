@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:16:07 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/15 17:03:24 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:49:33 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ int	main(int argc, char **argv)
 	table = (t_table){0};
 	if (parse(&table, argc, argv) != 0)
 		return (1);
-	table.start_time = get_time();
+	//table.start_time = get_time();
 	if (init_all_philos(&table) == 1)
 		return (1);
 	init_forks(&table);
+	table.start_time = get_time();
 	start_threads(&table);
 	pthread_create(&table.monitor_thread, NULL, monitor_routine, &table);
 	i = 0;

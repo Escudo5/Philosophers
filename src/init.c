@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:34:39 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/21 14:39:56 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/21 17:18:17 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	init_all_philos(t_table *table)
 	int	i;
 
 	i = 0;
-	if (table->total_philo <= 1 || table->total_philo > 200)
+	if (table->total_philo <= 0 || table->total_philo > 200)
 	{
 		return (ft_error(3));
 	}
