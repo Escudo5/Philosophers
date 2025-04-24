@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:31:53 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/23 17:39:46 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:50:33 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void take_first_fork(t_philo *philo, int first_fork)
                 pthread_mutex_unlock(&philo->table->forks[first_fork]);
                 return ;
             }
-            usleep(10000);
+            usleep(1000);
         }
     }
         
