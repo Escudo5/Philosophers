@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/25 12:20:31 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:09:00 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_table
 	pthread_mutex_t		print_lock;
 	pthread_mutex_t		monitor;
 	pthread_mutex_t		meal_full;
+	pthread_mutex_t		is_alive;
 	pthread_t			monitor_thread;
 }						t_table;
 
@@ -92,5 +93,6 @@ void					good_eat(t_philo *philo);
 void					take_first_fork(t_philo *philo, int first_fork);
 void					take_second_fork(t_philo *philo, int first_fork,
 							int second_fork);
+int						is_dead(t_table *table);
 
 #endif

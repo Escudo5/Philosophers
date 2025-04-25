@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:31:53 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/25 12:21:09 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:05:49 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,14 @@ void	take_second_fork(t_philo *philo, int first_fork, int second_fork)
 		pthread_mutex_unlock(&philo->table->forks[first_fork]);
 		return ;
 	}
+}
+
+int	is_dead(t_table *table)
+{
+	int	dead;
+
+	pthread_mutex_lock(&table->sim_mutex);
+	dead = table->dead;
+	pthread_mutex_unlock(&table->sim_mutex);
+	return (dead);
 }
