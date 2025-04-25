@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:56 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/24 13:42:52 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:22:21 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	philo_eat(t_philo *philo)
 		return ;
 	print_routine(philo, P_EAT);
 	usleep(philo->table->time_to_eat * 1000);
-	// philo->status = 0;
 	pthread_mutex_unlock(&philo->table->forks[second_fork]);
 	pthread_mutex_unlock(&philo->table->forks[first_fork]);
 }
@@ -82,7 +81,7 @@ void	*philo_routine(void *philo)
 	pthread_mutex_lock(&ph->table->monitor);
 	pthread_mutex_unlock(&ph->table->monitor);
 	if (ph->id % 2 == 0)
-	 	usleep(5000);
+		usleep(5000);
 	while (ph->table->dead == 0 && (ph->table->max_meals == -1
 			|| ph->meals_eaten < ph->table->max_meals))
 	{

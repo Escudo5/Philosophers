@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:16:07 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/24 14:11:44 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:22:06 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	main(int argc, char **argv)
 	table = (t_table){0};
 	if (parse(&table, argc, argv) != 0)
 		return (1);
-	//table.start_time = get_time();
 	if (init_all_philos(&table) == 1)
 		return (1);
 	init_forks(&table);

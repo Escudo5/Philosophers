@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/23 17:36:03 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:20:31 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_philo
 	t_table				*table;
 	pthread_mutex_t		meal_mutex;
 	pthread_t			thread;
-
 
 }						t_philo;
 
@@ -89,11 +88,9 @@ void					print_routine(t_philo *philo, int action);
 void					*ft_memset(void *s, int c, size_t n);
 void					*ft_calloc(size_t nmemb, size_t size);
 void					update_meal(t_philo *philo);
-void good_eat(t_philo *philo);
-void take_first_fork(t_philo *philo, int first_fork);
-void take_second_fork(t_philo *philo, int first_fork, int second_fork);
-
-
-
+void					good_eat(t_philo *philo);
+void					take_first_fork(t_philo *philo, int first_fork);
+void					take_second_fork(t_philo *philo, int first_fork,
+							int second_fork);
 
 #endif
