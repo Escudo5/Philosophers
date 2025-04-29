@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:56 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/29 10:07:29 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:03:31 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,7 @@
 
 void	philo_eat(t_philo *philo)
 {
-	if (philo->id % 2 != 0)
-	{
-		philo->first_fork = philo->right_fork;
-		philo->second_fork = philo->left_fork;
-	}
-	else
-	{
-		philo->first_fork = philo->left_fork;
-		philo->second_fork = philo->right_fork;
-	}
+	assign_forks(philo);
 	if (is_dead(philo->table))
 		return ;
 	if (take_first_fork(philo, philo->first_fork) != 0)
@@ -33,7 +24,11 @@ void	philo_eat(t_philo *philo)
 	philo->status = 1;
 	update_meal(philo);
 	if (is_dead(philo->table))
+	{
+		pthread_mutex_unlock(&philo->table->forks[philo->second_fork]);
+		pthread_mutex_unlock(&philo->table->forks[philo->first_fork]);
 		return ;
+	}
 	print_routine(philo, P_EAT);
 	usleep(philo->table->time_to_eat * 1000);
 	pthread_mutex_unlock(&philo->table->forks[philo->second_fork]);

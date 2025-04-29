@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/29 10:05:27 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:02:33 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int						assign_value(int *dst, char *str);
 int						is_number(char *str);
 long long				get_time(void);
 void					*dummy_routine(void *arg);
+void					assign_forks(t_philo *philo);
 int						is_alive(t_philo *philo);
 int						parse(t_table *table, int argc, char **argv);
 void					print_routine(t_philo *philo, int action);

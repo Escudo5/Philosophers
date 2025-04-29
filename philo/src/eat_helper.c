@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:31:53 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/29 10:03:18 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:05:52 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,18 @@ int	is_dead(t_table *table)
 	dead = table->dead;
 	pthread_mutex_unlock(&table->sim_mutex);
 	return (dead);
+}
+
+void	assign_forks(t_philo *philo)
+{
+	if (philo->id % 2 != 0)
+	{
+		philo->first_fork = philo->right_fork;
+		philo->second_fork = philo->left_fork;
+	}
+	else
+	{
+		philo->first_fork = philo->left_fork;
+		philo->second_fork = philo->right_fork;
+	}
 }
