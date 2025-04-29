@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:56 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/25 17:25:13 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/29 10:07:29 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,30 @@
 
 void	philo_eat(t_philo *philo)
 {
-	int	first_fork;
-	int	second_fork;
-
 	if (philo->id % 2 != 0)
 	{
-		first_fork = philo->right_fork;
-		second_fork = philo->left_fork;
+		philo->first_fork = philo->right_fork;
+		philo->second_fork = philo->left_fork;
 	}
 	else
 	{
-		first_fork = philo->left_fork;
-		second_fork = philo->right_fork;
+		philo->first_fork = philo->left_fork;
+		philo->second_fork = philo->right_fork;
 	}
 	if (is_dead(philo->table))
 		return ;
-	take_first_fork(philo, first_fork);
-	take_second_fork(philo, first_fork, second_fork);
+	if (take_first_fork(philo, philo->first_fork) != 0)
+		return ;
+	if (take_second_fork(philo, philo->first_fork, philo->second_fork) != 0)
+		return ;
 	philo->status = 1;
 	update_meal(philo);
 	if (is_dead(philo->table))
 		return ;
 	print_routine(philo, P_EAT);
 	usleep(philo->table->time_to_eat * 1000);
-	pthread_mutex_unlock(&philo->table->forks[second_fork]);
-	pthread_mutex_unlock(&philo->table->forks[first_fork]);
+	pthread_mutex_unlock(&philo->table->forks[philo->second_fork]);
+	pthread_mutex_unlock(&philo->table->forks[philo->first_fork]);
 }
 
 void	philo_sleep(t_philo *philo)
@@ -115,9 +114,9 @@ int	is_alive(t_philo *philo)
 		if (philo->table->dead == 0)
 		{
 			philo->table->dead = 1;
-			print_routine(philo, P_DIE);
 		}
 		pthread_mutex_unlock(&philo->table->sim_mutex);
+		print_routine(philo, P_DIE);
 		alive = 0;
 	}
 	pthread_mutex_unlock(&philo->meal_mutex);

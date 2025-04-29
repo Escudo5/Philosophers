@@ -6,13 +6,14 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:25:29 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/25 17:09:00 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/29 10:05:27 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
+# include <limits.h>
 # include <pthread.h>
 # include <stdbool.h>
 # include <stddef.h>
@@ -44,6 +45,8 @@ typedef struct s_philo
 	t_table				*table;
 	pthread_mutex_t		meal_mutex;
 	pthread_t			thread;
+	int					first_fork;
+	int					second_fork;
 
 }						t_philo;
 
@@ -79,7 +82,8 @@ void					start_threads(t_table *table);
 void					destroy_all(t_table *table);
 void					*philo_routine(void *philo);
 void					*monitor_philos(void *philo);
-int						ft_atoi(char *str);
+long					ft_atol(char *str);
+int						assign_value(int *dst, char *str);
 int						is_number(char *str);
 long long				get_time(void);
 void					*dummy_routine(void *arg);
@@ -90,8 +94,8 @@ void					*ft_memset(void *s, int c, size_t n);
 void					*ft_calloc(size_t nmemb, size_t size);
 void					update_meal(t_philo *philo);
 void					good_eat(t_philo *philo);
-void					take_first_fork(t_philo *philo, int first_fork);
-void					take_second_fork(t_philo *philo, int first_fork,
+int						take_first_fork(t_philo *philo, int first_fork);
+int						take_second_fork(t_philo *philo, int first_fork,
 							int second_fork);
 int						is_dead(t_table *table);
 

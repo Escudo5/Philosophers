@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:24:04 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/15 16:57:17 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/29 10:00:29 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,39 +15,35 @@
 int	ft_error(int n)
 {
 	if (n == 1)
-		printf("Número de argumentos inválido\n");
+		printf("Invalid argument number\n");
 	if (n == 2)
-		printf("Error al convertir argumentos\n");
+		printf("Error while converting\n");
 	if (n == 3)
-		printf("Error en argumentos\n");
+		printf("Argument error\n");
 	return (1);
 }
 
-int	ft_atoi(char *str)
+long	ft_atol(char *str)
 {
-	int	i;
-	int	sign;
-	int	result;
+	int		i;
+	int		sign;
+	long	result;
 
 	i = 0;
 	sign = 1;
 	result = 0;
-	while (str[i])
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-')
+		sign = -1;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if ((str[i] == ' ') || (str[i] >= 9 && str[i] <= 13))
-			str++;
-		if (str[i] == '-')
-			sign = -1;
-		if (str[i] == '-' || str[i] == '+')
-			i++;
-		while (str[i] >= '0' && str[i] <= '9')
-		{
-			result = result * 10 + (str[i] - '0');
-			i++;
-		}
-		return (result * sign);
+		result = result * 10 + (str[i] - '0');
+		i++;
 	}
-	return (0);
+	return (result * sign);
 }
 
 int	is_number(char *str)

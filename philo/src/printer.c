@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 13:06:25 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/23 12:09:59 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/28 12:05:55 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	print_routine(t_philo *philo, int action)
 
 	t = get_time() - philo->table->start_time;
 	pthread_mutex_lock(&philo->table->print_lock);
-	if (!philo->table->dead || action == P_DIE)
+	if (!is_dead(philo->table) || action == P_DIE)
 	{
 		printf("%d %d %s\n", t, philo->id, get_action(action));
 	}
