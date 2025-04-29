@@ -6,7 +6,7 @@
 /*   By: smarquez <smarquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:34:39 by smarquez          #+#    #+#             */
-/*   Updated: 2025/04/25 12:21:29 by smarquez         ###   ########.fr       */
+/*   Updated: 2025/04/29 10:24:43 by smarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	init_forks(t_table *table)
 	table->forks = calloc(sizeof(pthread_mutex_t), (table->total_philo));
 	if (!table->forks)
 	{
-		printf("No memoria para tenedores\n");
+		printf("No memory for forks\n");
 		return ;
 	}
 	while (i < table->total_philo)
@@ -104,7 +104,7 @@ void	start_threads(t_table *table)
 		err = pthread_create(&table->philos[i].thread, NULL, philo_routine,
 				&table->philos[i]);
 		if (err != 0)
-			printf("Error creando el hilo %d: %s\n", i, strerror(err));
+			printf("Error creating thread %d: %s\n", i, strerror(err));
 		i++;
 	}
 }
